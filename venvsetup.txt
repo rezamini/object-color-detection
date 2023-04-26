@@ -1,0 +1,18 @@
+python -m venv C:\Users\c7270670\Downloads\object-color-detection\venv
+
+venv\scripts\activate
+
+must select correct python interpreter from view -> command pallete -> python interpreter
+
+python detect_color.py --image example_shapes.png
+
+# To activate virtual environment:
+# -> .\env\Scripts\activate
+# To deactivate virtual environment:
+# -> deactivate
+
+#add in settings.json 
+"[python]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4  
+  }
