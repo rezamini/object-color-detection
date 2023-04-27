@@ -40,7 +40,7 @@ for c in cnts:
 	# detect the shape of the contour and label the color
 	shape = sd.detect(c)
 	color = cl.label(lab, c)
-	color2 = cl.label_test(lab, hsv_frame, c)
+	# color2 = cl.label_test(lab, hsv_frame, c)
 
 	# multiply the contour (x, y)-coordinates by the resize ratio,
 	# then draw the contours and the name of the shape and labeled
