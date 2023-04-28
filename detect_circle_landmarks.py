@@ -24,7 +24,7 @@ if circles is not None:
         # cv.circle(output_image, (x, y), 2, (255, 255, 255), 3)# inner circle/dot
         
         landmark_color = detectLandmarkColor.detect_color(original_image, y, x)
-
+        
         cv.putText(output_image, landmark_color, (x+r, y+r+r),
             cv.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
 
