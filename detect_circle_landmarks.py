@@ -20,13 +20,13 @@ detectLandmarkColor = DetectLandmarkColor()
 if circles is not None:
     detected_circles = np.uint16(np.around(circles))
     for (x,y,r) in detected_circles[0, :]:
+        landmark_color, bgr_color = detectLandmarkColor.detect_color(original_image, y, x)
+
         cv.circle(output_image, (x,y), r, (255,255,255), 3) #outer circle
         # cv.circle(output_image, (x, y), 2, (255, 255, 255), 3)# inner circle/dot
         
-        landmark_color = detectLandmarkColor.detect_color(original_image, y, x)
-        
         cv.putText(output_image, landmark_color, (x+r, y+r+r),
-            cv.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+            cv.FONT_HERSHEY_SIMPLEX, 0.5, (int(bgr_color[0]), int(bgr_color[1]), int(bgr_color[2])), 2)
 
 
 

@@ -1,6 +1,7 @@
 import cv2 as cv
 # from sklearn.cluster import KMeans
-# import numpy as np
+import numpy as np
+
 
 class DetectLandmarkColor:
     color_ranges = {
@@ -21,12 +22,21 @@ class DetectLandmarkColor:
         hsv_frame = cv.cvtColor(original_image, cv.COLOR_BGR2HSV)
         pixels_center = hsv_frame[y, x]
 
-        color = "undefined"
+        color_name = "undefined"
         hue_value = pixels_center[0]
 
-        color = next((color_name for (lower, upper), color_name in self.color_ranges.items(
+        color_name = next((color_name for (lower, upper), color_name in self.color_ranges.items(
         ) if lower <= hue_value < upper), "undefined")
 
+        #convert the hue value back to bgr in order to be used for text or circle colors
+        rgb_color = np.uint8([[[hue_value, 255, 255]]])
+        rgb_color = cv.cvtColor(rgb_color, cv.COLOR_HSV2RGB)
+        bgr_color = cv.cvtColor(rgb_color, cv.COLOR_RGB2BGR)
+
+        # Detect pixel color from original image. but it might detect wrongly if there is a text on the landmark. it will detect text color
+        # pixel_bgr_values = original_image[int(y), int(x + 2)]
+        # bgr_1, bgr_2, bgr_3 = int(pixel_bgr_values[0]), int(pixel_bgr_values[1]), int(pixel_bgr_values[2])
+        
         # if hue_value < 5:
         #     color = "RED"
         # elif hue_value < 22:
@@ -40,4 +50,4 @@ class DetectLandmarkColor:
         # elif hue_value < 170:
         #     color = "VIOLET"
 
-        return color
+        return color_name, bgr_color[0, 0, :]
