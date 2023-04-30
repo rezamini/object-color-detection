@@ -3,6 +3,7 @@ import numpy as np
 import cv2 as cv
 from detect_landmark_color import DetectLandmarkColor
 import math
+from apicalls import ApiCalls
 
 original_image = cv.imread("example_shapes7.png")
 output_image = original_image.copy()
@@ -15,6 +16,7 @@ maxR = round(width/11)
 minDis = round(width/7)
 circles = cv.HoughCircles(blur, cv.HOUGH_GRADIENT, 1, minDis, param1=14, param2=30, minRadius=minR, maxRadius=maxR)
 detectLandmarkColor = DetectLandmarkColor()
+api = ApiCalls()
 
 # Draw circles
 if circles is not None:
@@ -32,6 +34,9 @@ if circles is not None:
 
 # cv.circle(original_image, (422, 198), 1, (0, 0, 0), 3)
 # print(hsv_frame[198, 422])
+
+api.send_data("A")
+
 cv.imshow("result", np.hstack([original_image, output_image]))
 cv.waitKey(0)
 cv.destroyAllWindows()
