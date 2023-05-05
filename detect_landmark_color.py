@@ -15,7 +15,7 @@ class DetectLandmarkColor:
         (160, 170): "PINK"
     }
 
-    def self(self):
+    def __init__(self):
         pass
 
     def detect_color(self, original_image, y, x):

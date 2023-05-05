@@ -1,19 +1,29 @@
 import requests
 
 class ApiCalls:
+    API_URL ="http://localhost:8888/smemAttributes"
+
     def __init__(self):
         pass
 
     def get_data(self):
-        api_url = "https://jsonplaceholder.typicode.com/todos/1"
+        api_url = self.API_URL
         response = requests.get(api_url)
         print("***** API GETTING RESULT *******")
         print(response.json())
+    
+    def send_data(self, colorResult):
+        api_url = self.API_URL
 
-    def send_data(self, data):
-        api_url = "https://jsonplaceholder.typicode.com/todos"
-        todo = {"userId": 1, "title": "Buy milk", "completed": False}
-        response = requests.post(api_url, json=todo)
+        attributes = {
+            "color": list(colorResult)
+        }
+
+        payload = {"name": "detected_colors", "attributes":  attributes }
+        # print(payload)
+        
+        response = requests.post(api_url, json=payload)
         print("***** API SENDING RESULT *******")
         print(response.json())
         print(response.status_code)
+        print(response.ok)
