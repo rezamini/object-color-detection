@@ -1,19 +1,26 @@
 import os
 from detect_circle_landmarks import DetectCircleLandmarks
+from detect_landmark_color import DetectLandmarkColor
 
 IMAGE_FOLDER_PATH = "images/"
 
-detect = DetectCircleLandmarks(True)
-# detect.detect_circles(IMAGE_FOLDER_PATH, "example_shapes7.png")
+detectLandmark = DetectCircleLandmarks()
+detectLandmarkColor = DetectLandmarkColor()
+
+
+# image_name, original_image, circles = detect.detect_circles(IMAGE_FOLDER_PATH, "example_shapes8.png")
+# detected_colors, bgr_colors = detectLandmarkColor.detect_colors(image_name, original_image, circles)
+# detect.draw_detected_landmarks(original_image, original_image.copy(), circles, detected_colors, bgr_colors)
 
 # loop and detect entire image folder files
 for path, dirs, files in os.walk(IMAGE_FOLDER_PATH):
     for file in files:
-        # image_path = os.path.join(path, file)
-        detect.detect_circles(path, file)
+        image_name, original_image, circles = detectLandmark.detect_circles(path, file)
+        detected_colors, bgr_colors = detectLandmarkColor.detect_colors(image_name, original_image, circles)
+        # detect.draw_detected_landmarks(original_image, original_image.copy(), circles, detected_colors, bgr_colors) 
 
-print("------------ FINAL DETECTED COLORS ------------")
-print(detect.color_result)
+print("------------ FINAL UNIQUE DETECTED COLORS ------------")
+print(set(detectLandmarkColor.color_result))
 
 
 

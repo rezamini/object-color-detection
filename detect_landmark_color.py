@@ -4,6 +4,8 @@ import numpy as np
 
 
 class DetectLandmarkColor:
+    color_result = list()
+
     color_ranges = {
         (170, 10): "RED",
         (10, 25): "ORANGE",
@@ -18,7 +20,28 @@ class DetectLandmarkColor:
     def __init__(self):
         pass
 
-    def detect_color(self, original_image, y, x):
+    def detect_colors(self, image_name, original_image, circles):
+        if circles is not None:
+            temp_color_result = list()
+            temp_bgr_colors = list()
+
+            detected_circles = np.uint16(np.around(circles))
+            for (x,y,r) in detected_circles[0, :]:
+                landmark_color, bgr_color = self.__detect_single_color(original_image, y, x)
+                temp_color_result.append(landmark_color.lower())
+                temp_bgr_colors.append(bgr_color)
+
+
+        #add detected colors to the main result  
+        self.color_result.extend(temp_color_result)
+
+        #print the detected colors for every image
+        print("------------ Detected Unique Colors for file [" + image_name + "] ------------")
+        print(set(temp_color_result))
+
+        return temp_color_result, temp_bgr_colors
+
+    def __detect_single_color(self, original_image, y, x):
         hsv_frame = cv.cvtColor(original_image, cv.COLOR_BGR2HSV)
         pixels_center = hsv_frame[y, x]
 
