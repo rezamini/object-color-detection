@@ -2,13 +2,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import cv2 as cv
 # from detect_landmark_color import DetectLandmarkColor
-from apicalls import ApiCalls
+# from apicalls import ApiCalls
 
 
 class DetectCircleLandmarks:
     # detectLandmarkColor = DetectLandmarkColor()
-    api = ApiCalls()
-    color_result = set()
+    # api = ApiCalls()
+    # color_result = set()
 
     def __init__(self):
         pass
