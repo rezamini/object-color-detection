@@ -9,9 +9,9 @@ detectLandmark = DetectCircleLandmarks()
 detectLandmarkColor = DetectLandmarkColor()
 api = ApiCalls()
 
-# image_name, original_image, circles = detect.detect_circles(IMAGE_FOLDER_PATH, "example_shapes8.png")
+# image_name, original_image, circles = detectLandmark.detect_circles(IMAGE_FOLDER_PATH, "example_shapes_cyan.png")
 # detected_colors, bgr_colors = detectLandmarkColor.detect_colors(image_name, original_image, circles)
-# detect.draw_detected_landmarks(original_image, original_image.copy(), circles, detected_colors, bgr_colors)
+# detectLandmark.draw_detected_landmarks(original_image, original_image.copy(), circles, detected_colors, bgr_colors)
 
 # loop and detect entire image folder files
 for path, dirs, files in os.walk(IMAGE_FOLDER_PATH):

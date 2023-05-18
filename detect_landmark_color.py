@@ -28,8 +28,10 @@ class DetectLandmarkColor:
             detected_circles = np.uint16(np.around(circles))
             for (x,y,r) in detected_circles[0, :]:
                 landmark_color, bgr_color = self.__detect_single_color(original_image, y, x)
-                temp_color_result.append(landmark_color.lower())
-                temp_bgr_colors.append(bgr_color)
+
+                if landmark_color.lower() != "undefined" :
+                    temp_color_result.append(landmark_color.lower())
+                    temp_bgr_colors.append(bgr_color)
 
 
         #add detected colors to the main result  
